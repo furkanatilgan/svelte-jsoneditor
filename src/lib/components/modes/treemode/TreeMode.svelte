@@ -955,25 +955,13 @@
     if (
       readOnly ||
       !documentState.selection ||
-      (!isMultiSelection(documentState.selection) && !isValueSelection(documentState.selection)) ||
+      !isMultiSelection(documentState.selection) || 
       isEmpty(documentState.selection.focusPath) // root selected, cannot extract
     ) {
       return
     }
 
-    debug('extract', { selection: documentState.selection })
-
-    const operations = extract(json, documentState.selection)
-
-    handlePatch(operations, (patchedJson, patchedState) => {
-      if (isObjectOrArray(patchedJson)) {
-        // expand extracted object/array
-        const path = []
-        return {
-          state: expandRecursive(patchedJson, patchedState, path)
-        }
-      }
-    })
+    window.handleRsExpose(documentState.selection.focusPath)
   }
 
   function handleInsert(insertType: InsertType): void {

@@ -3,14 +3,11 @@
 <script lang="ts">
   import {
     faArrowRightArrowLeft,
+    faArrowUpRightFromSquare,
     faCaretSquareDown,
     faCaretSquareUp,
     faClone,
-    faCopy,
-    faCropAlt,
-    faCut,
     faFilter,
-    faPaste,
     faPen,
     faPlus,
     faSortAmountDownAlt,
@@ -76,7 +73,7 @@
   $: canExtract =
     hasJson &&
     selection != null &&
-    (isMultiSelection(selection) || isValueSelection(selection)) &&
+    !isMultiSelection(selection) &&
     !rootSelected // must not be root
 
   $: canEditKey =
@@ -243,80 +240,80 @@
       ]
     },
     { type: 'separator' },
-    {
-      type: 'row',
-      items: [
-        {
-          type: 'dropdown-button',
-          main: {
-            type: 'button',
-            onClick: handleCut,
-            icon: faCut,
-            text: 'Cut',
-            title: 'Cut selected contents, formatted with indentation (Ctrl+X)',
-            disabled: !hasSelectionContents
-          },
-          width: '10em',
-          items: [
-            {
-              type: 'button',
-              icon: faCut,
-              text: 'Cut formatted',
-              title: 'Cut selected contents, formatted with indentation (Ctrl+X)',
-              onClick: handleCut,
-              disabled: !hasSelectionContents
-            },
-            {
-              type: 'button',
-              icon: faCut,
-              text: 'Cut compacted',
-              title: 'Cut selected contents, without indentation (Ctrl+Shift+X)',
-              onClick: handleCutCompact,
-              disabled: !hasSelectionContents
-            }
-          ]
-        },
-        {
-          type: 'dropdown-button',
-          main: {
-            type: 'button',
-            onClick: handleCopy,
-            icon: faCopy,
-            text: 'Copy',
-            title: 'Copy selected contents, formatted with indentation (Ctrl+C)',
-            disabled: !hasSelectionContents
-          },
-          width: '12em',
-          items: [
-            {
-              type: 'button',
-              icon: faCopy,
-              text: 'Copy formatted',
-              title: 'Copy selected contents, formatted with indentation (Ctrl+C)',
-              onClick: handleCopy,
-              disabled: !hasSelectionContents
-            },
-            {
-              type: 'button',
-              icon: faCopy,
-              text: 'Copy compacted',
-              title: 'Copy selected contents, without indentation (Ctrl+Shift+C)',
-              onClick: handleCopyCompact,
-              disabled: !hasSelectionContents
-            }
-          ]
-        },
-        {
-          type: 'button',
-          onClick: handlePaste,
-          icon: faPaste,
-          text: 'Paste',
-          title: 'Paste clipboard contents (Ctrl+V)',
-          disabled: !hasSelection
-        }
-      ]
-    },
-    { type: 'separator' },
+    // {
+    //   type: 'row',
+    //   items: [
+    //     {
+    //       type: 'dropdown-button',
+    //       main: {
+    //         type: 'button',
+    //         onClick: handleCut,
+    //         icon: faCut,
+    //         text: 'Cut',
+    //         title: 'Cut selected contents, formatted with indentation (Ctrl+X)',
+    //         disabled: !hasSelectionContents
+    //       },
+    //       width: '10em',
+    //       items: [
+    //         {
+    //           type: 'button',
+    //           icon: faCut,
+    //           text: 'Cut formatted',
+    //           title: 'Cut selected contents, formatted with indentation (Ctrl+X)',
+    //           onClick: handleCut,
+    //           disabled: !hasSelectionContents
+    //         },
+    //         {
+    //           type: 'button',
+    //           icon: faCut,
+    //           text: 'Cut compacted',
+    //           title: 'Cut selected contents, without indentation (Ctrl+Shift+X)',
+    //           onClick: handleCutCompact,
+    //           disabled: !hasSelectionContents
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       type: 'dropdown-button',
+    //       main: {
+    //         type: 'button',
+    //         onClick: handleCopy,
+    //         icon: faCopy,
+    //         text: 'Copy',
+    //         title: 'Copy selected contents, formatted with indentation (Ctrl+C)',
+    //         disabled: !hasSelectionContents
+    //       },
+    //       width: '12em',
+    //       items: [
+    //         {
+    //           type: 'button',
+    //           icon: faCopy,
+    //           text: 'Copy formatted',
+    //           title: 'Copy selected contents, formatted with indentation (Ctrl+C)',
+    //           onClick: handleCopy,
+    //           disabled: !hasSelectionContents
+    //         },
+    //         {
+    //           type: 'button',
+    //           icon: faCopy,
+    //           text: 'Copy compacted',
+    //           title: 'Copy selected contents, without indentation (Ctrl+Shift+C)',
+    //           onClick: handleCopyCompact,
+    //           disabled: !hasSelectionContents
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       type: 'button',
+    //       onClick: handlePaste,
+    //       icon: faPaste,
+    //       text: 'Paste',
+    //       title: 'Paste clipboard contents (Ctrl+V)',
+    //       disabled: !hasSelection
+    //     }
+    //   ]
+    // },
+    // { type: 'separator' },
     {
       type: 'row',
       items: [
@@ -334,9 +331,9 @@
             {
               type: 'button',
               onClick: handleExtract,
-              icon: faCropAlt,
-              text: 'Extract',
-              title: 'Extract selected contents',
+              icon: faArrowUpRightFromSquare,
+              text: 'Expose',
+              title: 'Expose selected content',
               disabled: !canExtract
             },
             {
