@@ -32,7 +32,9 @@
   const { keyStartAdornment } = getContext('exposedContext')
 
   onMount(() => {
-    container.prepend(keyStartAdornment(path) || '')
+    if (keyStartAdornment) {
+      container.prepend(keyStartAdornment(path) || '')
+    }
   })
 
   $: isSelected = selection
