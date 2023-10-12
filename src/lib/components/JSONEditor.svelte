@@ -18,7 +18,7 @@
   import AbsolutePopup from './modals/popup/AbsolutePopup.svelte'
   import { javascriptQueryLanguage } from '$lib/plugins/query/javascriptQueryLanguage.js'
   import { renderValue } from '$lib/plugins/value/renderValue.js'
-  import { tick } from 'svelte'
+  import { tick, setContext } from 'svelte'
   import TransformModal from './modals/TransformModal.svelte'
   import SortModal from './modals/SortModal.svelte'
   import type {
@@ -94,6 +94,15 @@
   }
   export let onFocus: OnFocus = noop
   export let onBlur: OnBlur = noop
+
+  /**
+   * `sx` prop doesn't work, styles should be given with `style` prop.
+   */
+  export let keyStartAdornment: (path: JSONPath) => any = () => {}
+
+  setContext('exposedContext', {
+    keyStartAdornment
+  })
 
   let instanceId = uniqueId()
   let hasFocus = false

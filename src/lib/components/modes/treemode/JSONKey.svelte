@@ -9,7 +9,7 @@
   } from '$lib/logic/selection.js'
   import SearchResultHighlighter from './highlight/SearchResultHighlighter.svelte'
   import EditableDiv from '../../controls/EditableDiv.svelte'
-  import { addNewLineSuffix } from '$lib/utils/domUtils.js'
+  import { addNewLineSuffix, encodeDataPath } from '$lib/utils/domUtils.js'
   import { UPDATE_SELECTION } from '$lib/constants.js'
   import type { ExtendedSearchResultItem, TreeModeContext } from '$lib/types.js'
   import { type JSONSelection } from '$lib/types.js'
@@ -17,6 +17,7 @@
   import { isKeySelection } from '$lib/logic/selection.js'
   import ContextMenuPointer from '../../../components/controls/contextmenu/ContextMenuPointer.svelte'
   import { classnames } from '$lib/utils/cssUtils.js'
+  import { getContext, onMount } from 'svelte'
 
   export let path: JSONPath
   export let pointer: JSONPointer
@@ -26,6 +27,13 @@
   export let onUpdateKey: (oldKey: string, newKey: string) => string
 
   export let context: TreeModeContext
+
+  let container
+  const { keyStartAdornment } = getContext('exposedContext')
+
+  onMount(() => {
+    container.prepend(keyStartAdornment(path) || '')
+  })
 
   $: isSelected = selection
     ? selection.pointersMap[pointer] === true && isKeySelection(selection)
@@ -75,7 +83,12 @@
     onFind={context.onFind}
   />
 {:else}
-  <div data-type="selectable-key" class={getKeyClass(key)} on:dblclick={handleKeyDoubleClick}>
+  <div
+    data-type="selectable-key"
+    class={getKeyClass(key)}
+    on:dblclick={handleKeyDoubleClick}
+    bind:this={container}
+  >
     {#if searchResultItems}
       <SearchResultHighlighter text={context.normalization.escapeValue(key)} {searchResultItems} />
     {:else}
