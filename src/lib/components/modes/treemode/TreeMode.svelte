@@ -955,8 +955,8 @@
     if (
       readOnly ||
       !documentState.selection ||
-      !isMultiSelection(documentState.selection) || 
-      isEmpty(documentState.selection.focusPath) // root selected, cannot extract
+      isMultiSelection(documentState.selection) ||
+      isEmpty(documentState.selection.focusPath) || // root selected, cannot extract
     ) {
       return
     }
