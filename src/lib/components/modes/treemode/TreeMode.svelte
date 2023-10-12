@@ -103,6 +103,7 @@
     Content,
     ContentErrors,
     DocumentState,
+    HandleExpose,
     HistoryItem,
     InsertType,
     JSONParser,
@@ -187,6 +188,7 @@
   export let onSortModal: OnSortModal
   export let onTransformModal: OnTransformModal
   export let onJSONEditorModal: OnJSONEditorModal
+  export let handleExpose: HandleExpose
 
   // modalOpen is true when one of the modals is open.
   // This is used to track whether the editor still has focus
@@ -957,11 +959,12 @@
       !documentState.selection ||
       isMultiSelection(documentState.selection) ||
       isEmpty(documentState.selection.focusPath) || // root selected, cannot extract
+      !handleExpose
     ) {
       return
     }
 
-    window.handleRsExpose(documentState.selection.focusPath)
+    handleExpose(documentState.selection.focusPath)
   }
 
   function handleInsert(insertType: InsertType): void {

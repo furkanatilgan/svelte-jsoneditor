@@ -24,6 +24,7 @@
   import type {
     Content,
     ContentErrors,
+    HandleExpose,
     JSONEditorModalCallback,
     JSONEditorPropsOptional,
     JSONParser,
@@ -95,6 +96,7 @@
   }
   export let onFocus: OnFocus = noop
   export let onBlur: OnBlur = noop
+  export let handleExpose: HandleExpose = noop
 
   /**
    * `sx` prop doesn't work, styles should be given with `style` prop.
@@ -465,6 +467,7 @@
             {onSortModal}
             {onTransformModal}
             {onJSONEditorModal}
+            {handleExpose}
           />
         {/key}
       </div>

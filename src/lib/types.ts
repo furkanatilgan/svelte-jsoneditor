@@ -321,6 +321,7 @@ export type OnSortModal = (props: SortModalCallback) => void
 export type OnTransformModal = (props: TransformModalCallback) => void
 export type OnJSONEditorModal = (props: JSONEditorModalCallback) => void
 export type FindNextInside = (path: JSONPath) => JSONSelection | undefined
+export type HandleExpose = (path: JSONPath) => void
 export type KeyStartAdornment = (path: JSONPath) => any
 
 export interface SearchResult {
@@ -444,6 +445,7 @@ export interface JSONEditorPropsOptional {
   onError?: OnError
   onFocus?: OnFocus
   onBlur?: OnBlur
+  handleExpose?: HandleExpose
 }
 
 export interface JSONEditorContext {

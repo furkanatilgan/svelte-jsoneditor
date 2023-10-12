@@ -2,6 +2,7 @@
   import type {
     Content,
     ContentErrors,
+    HandleExpose,
     JSONParser,
     JSONPatchResult,
     JSONPathParser,
@@ -60,6 +61,7 @@
   export let onSortModal: OnSortModal
   export let onTransformModal: OnTransformModal
   export let onJSONEditorModal: OnJSONEditorModal
+  export let handleExpose: HandleExpose
 
   let refTreeMode
   let refTableMode
@@ -296,5 +298,6 @@
     {onSortModal}
     {onTransformModal}
     {onJSONEditorModal}
+    {handleExpose}
   />
 {/if}
