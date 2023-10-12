@@ -29,6 +29,7 @@
     JSONParser,
     JSONPatchResult,
     JSONPathParser,
+    KeyStartAdornment,
     OnBlur,
     OnChange,
     OnChangeMode,
@@ -98,7 +99,7 @@
   /**
    * `sx` prop doesn't work, styles should be given with `style` prop.
    */
-  export let keyStartAdornment: (path: JSONPath) => any = () => {}
+  export let keyStartAdornment: KeyStartAdornment = noop
 
   setContext('exposedContext', {
     keyStartAdornment

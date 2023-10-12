@@ -321,6 +321,7 @@ export type OnSortModal = (props: SortModalCallback) => void
 export type OnTransformModal = (props: TransformModalCallback) => void
 export type OnJSONEditorModal = (props: JSONEditorModalCallback) => void
 export type FindNextInside = (path: JSONPath) => JSONSelection | undefined
+export type KeyStartAdornment = (path: JSONPath) => any
 
 export interface SearchResult {
   items: ExtendedSearchResultItem[]
@@ -429,6 +430,7 @@ export interface JSONEditorPropsOptional {
   validator?: Validator | null
   validationParser?: JSONParser
   pathParser?: JSONPathParser
+  keyStartAdornment?: KeyStartAdornment
 
   queryLanguages?: QueryLanguage[]
   queryLanguageId?: string
