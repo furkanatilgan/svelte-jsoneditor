@@ -33,7 +33,7 @@
 
   onMount(() => {
     if (keyStartAdornment) {
-      container.prepend(keyStartAdornment(path) || '')
+      container?.prepend?.(keyStartAdornment(path) || '')
     }
   })
 
